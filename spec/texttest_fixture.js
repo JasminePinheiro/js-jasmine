@@ -15,7 +15,9 @@ const items = [
   new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
 
   // This Conjured item does not work properly yet
-  new Item("Conjured Mana Cake", 3, 6),
+  new Item("Conjured Mana Cake", -1, 6),
+  new Item("Conjured Sulfuras, Hand of Ragnaros", 0, 80),
+
 ];
 
 const days = Number(process.argv[2]) || 2; // Obtém o númoero de dias a serem simulados a partir dos argumentos da linha de comando ou assume 2 dias como padrão 
