@@ -12,10 +12,10 @@ class Shop {
   }
 
   updateQuality() {
+
     for (var i = 0; i < this.items.length; i++) {
       const isExpiration = this.items[i].name.includes('Conjured'); // se o item for expirado e conjurado ele diminui duas vezes mais rápido
 
-      
       switch (this.items[i].name) {
         case 'Aged Brie':
           if (this.items[i].quality < 50) {
@@ -39,9 +39,15 @@ class Shop {
           break;
 
         case 'Sulfuras, Hand of Ragnaros':
+          if (this.items[i].quality != 80) {
+            this.items[i].quality = 80;
+          }
           break;
 
-        case 'Conjured Sulfuras, Hand of Ragnaros': // item lendário vão ter uma qualidade imutave
+        case 'Conjured Sulfuras, Hand of Ragnaros': // item lendário vão ter uma qualidade imutavel
+          if (this.items[i].quality != 80) {
+            this.items[i].quality = 80;
+          }
           break;
 
         default:
@@ -52,7 +58,17 @@ class Shop {
           if (this.items[i].sellIn < 0) {
             const qualityDecreaseAfterExpiration = isExpiration ? 2 : 1;
             this.items[i].quality -= qualityDecreaseAfterExpiration;
+
           }
+
+          if (this.items[i].quality < 0) {
+            this.items[i].quality = 0;
+          }
+
+          if (this.items[i].quality > 50) {
+            this.items[i].quality = 50;
+          }
+
           break;
       }
 
