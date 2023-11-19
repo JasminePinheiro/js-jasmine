@@ -8,6 +8,7 @@ const items = [
   new Item("Aged Brie", 2, 0),
 
   new Item("Elixir of the Mongoose", 5, 7),
+
   new Item("Sulfuras, Hand of Ragnaros", 0, 80),
   new Item("Sulfuras, Hand of Ragnaros", -1, 80),
 
@@ -29,7 +30,7 @@ const items = [
   new Item("Conjured Sulfuras, Hand of Ragnaros", -1, 80),
 ];
 
-const days = Number(process.argv[2]) || 2;
+const days = Number(process.argv[5]) || 5;
 const gildedRose = new Shop(items);
 
 console.log("OMGHAI!");
@@ -41,4 +42,16 @@ for (let day = 0; day < days; day++) {
   );
   gildedRose.updateQuality();
 }
+
+console.log("\n");
+
+// Teste que simula a chamada do método updateQuality em uma instância de Item 
+const item = new Item("Conjured Mana Cake", 5, 10)
+
+try {
+  item.updateQuality();
+} catch (error) {
+  console.log(error.message);
+}
+
 console.log("-------- Fim do Teste --------");

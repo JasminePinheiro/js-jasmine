@@ -10,30 +10,26 @@ class Item {
   }
 }
 
+
 class AgedBrieItem extends Item {
   updateQuality() {
-    if (this.quality < 50) {
-      this.quality += 1;
-    }
+    this.quality = this.quality < 50 ? this.quality + 1 : this.quality;
   }
 }
+
 
 class BackstagePassItem extends Item {
   updateQuality() {
     if (this.quality < 50) {
       this.quality += 1;
-      if (this.sellIn < 11 && this.quality < 50) {
-        this.quality += 1;
-      }
-      if (this.sellIn < 6 && this.quality < 50) {
-        this.quality += 1;
-      }
+      this.quality += (this.sellIn < 11 && this.quality < 50) ? 1 : 0;
+      this.quality += (this.sellIn < 6 && this.quality < 50) ? 1 : 0;
     }
-    if (this.sellIn < 0) {
-      this.quality = 0;
-    }
+
+    this.quality = (this.sellIn < 0) ? 0 : this.quality;
   }
 }
+
 
 class SulfurasItem extends Item {
   updateQuality() {
@@ -47,16 +43,16 @@ class SulfurasItem extends Item {
 class ConjuredItem extends Item {
   updateQuality() {
     const isConjured = this.name.includes('Conjured');
-    const qualityDecrease = isConjured ? 2 : 1; // Diminui em dobro se for Conjured, caso contrário, diminui normalmente
+    const qualityDecrease = isConjured ? 2 : 1;
+
     if (this.quality > 0) {
-      this.quality -= qualityDecrease;
+      const fatorSellIn = this.sellIn <= 0 ? 2 : 1;
+      this.quality -= qualityDecrease * fatorSellIn;
     }
 
     this.quality = Math.max(0, this.quality);
   }
 }
-
-
 
 class ConjuredSulfurasItem extends SulfurasItem {
   // Item lendário: qualidade imutável
@@ -93,10 +89,11 @@ class Shop {
       case 'Conjured Sulfuras, Hand of Ragnaros':
         return new ConjuredSulfurasItem(item.name, item.sellIn, item.quality);
 
-      case item.name.includes('Conjured'):
-        return new ConjuredItem(item.name, item.sellIn, item.quality);
-
       default:
+        if (item.name.includes('Conjured')) {
+          return new ConjuredItem(item.name, item.sellIn, item.quality);
+        }
+
         return new NormalItem(item.name, item.sellIn, item.quality);
     }
   }
