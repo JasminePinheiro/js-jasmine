@@ -1,5 +1,5 @@
 class Item {
-  constructor(name, sellIn, quality){
+  constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
@@ -8,16 +8,16 @@ class Item {
 
 // O construtor que inicializa uma instância de Shop com um array de itens. Se nenhum array for fornecido, é usado um array vazio como padrão.
 class Shop {
-  constructor(items=[]){
+  constructor(items = []) {
     this.items = items;
   }
 
 
-// Itera sobre cada item na loja.
-// Verifica o tipo de item e ajusta sua qualidade de acordo com as regras específicas para cada tipo de item.
-// Atualiza o prazo de validade (sellIn) para todos os itens, exceto para "Sulfuras, Hand of Ragnaros".
-// Verifica se o prazo de validade expirou e ajusta a qualidade conforme necessário.
-// Retorna o array atualizado de itens.
+  // Itera sobre cada item na loja.
+  // Verifica o tipo de item e ajusta sua qualidade de acordo com as regras específicas para cada tipo de item.
+  // Atualiza o prazo de validade (sellIn) para todos os itens, exceto para "Sulfuras, Hand of Ragnaros".
+  // Verifica se o prazo de validade expirou e ajusta a qualidade conforme necessário.
+  // Retorna o array atualizado de itens.
 
   updateQuality() {
 
